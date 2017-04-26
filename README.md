@@ -30,6 +30,13 @@ This extension contributes the following settings:
 
 * `tci.tibcli`: The full qualified path to the tibcli executable (including .exe on Windows) which is set to `c:/tmp/tibcli.exe` by default
 
+## Installing the extension
+
+You can install the extension using the VS Code --install-extension command line switch
+```
+code --install-extension tci-tools-0.0.2.vsix
+```
+
 ## Known Issues
 
 This release has been tested on Microsoft Windows 10 (with PowerShell) and macOS 10.12 (with Bash)
@@ -47,3 +54,8 @@ Added support for macOS 10.12 (Sierra)
 
 ### 0.0.1
 Initial release of tci-tools on Windows
+
+## License
+Copyright © 2017. TIBCO Software Inc.
+This file is subject to the license terms contained
+in the license file that is distributed with this file.
