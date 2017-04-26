@@ -1,7 +1,5 @@
 # tci-tools
 
-![release 0.0.2](https://img.shields.io/badge/release-0.0.2-brightgreen.png)
-
 Out of the box support for TIBCO(R) Cloud Integration right in VSCode
 
 ## Features
