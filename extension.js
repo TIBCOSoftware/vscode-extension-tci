@@ -151,7 +151,7 @@ function activate(context) {
                     }
                 });
             }
-        } if (/^darwin/.test(process.platform)) {
+        } else if (/^darwin/.test(process.platform)) {
 
             var parentFolder = workspaceFolder.substring(0, workspaceFolder.lastIndexOf('/'));
             var tibcli = vscode.workspace.getConfiguration('tci').get('tibcli');
@@ -175,7 +175,7 @@ function activate(context) {
                 });
             }
         } else {
-            vscode.window.showErrorMessage('This command is only supported on ' + process.platform);
+            vscode.window.showErrorMessage('This command is not supported on ' + process.platform);
         }
     }
 

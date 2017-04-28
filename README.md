@@ -47,6 +47,9 @@ Feel free to open a Github issue or ask a question on the [TIBCO Community](http
 
 ## Release Notes
 
+### 0.0.3
+Correct error for Windows 10, which caused zipfile to be built wrongly
+
 ### 0.0.2
 Added support for macOS 10.12 (Sierra)
 
