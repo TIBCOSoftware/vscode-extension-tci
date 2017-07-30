@@ -2,7 +2,7 @@
     "name": "tci-tools",
     "displayName": "TCI Tools",
     "description": "TIBCO Cloud Integration Tools for VS Code",
-    "version": "0.0.3",
+    "version": "0.1.0",
     "publisher": "retgits",
     "engines": {
         "vscode": "^1.10.0"
@@ -13,11 +13,12 @@
     "activationEvents": [
         "onCommand:tci.checkInstallationStatus",
         "onCommand:tci.launchAPIModeler",
-        "onCommand:tci.generateDeploymentArtifacts",
+        "onCommand:tci.createDeploymentArtifacts",
         "onCommand:tci.pushNodejsApp",
         "onCommand:tci.launchNodeAppLocally",
         "onCommand:tci.launchTIBCOCommunity",
-        "onCommand:tci.launchTCIDocs"
+        "onCommand:tci.launchTCIDocs",
+        "onCommand:tci.createNodejsApp"
     ],
     "license": "SEE LICENSE IN README.md",
     "main": "./extension",
@@ -27,27 +28,38 @@
                 "command": "tci.checkInstallationStatus",
                 "title": "Check installation status",
                 "category": "TCI"
-            },{
+            },
+            {
                 "command": "tci.launchAPIModeler",
                 "title": "Open API Modeler",
                 "category": "TCI"
-            },{
-                "command": "tci.generateDeploymentArtifacts",
-                "title": "Generate deployment artifacts",
+            },
+            {
+                "command": "tci.createDeploymentArtifacts",
+                "title": "Create deployment artifacts",
                 "category": "TCI"
-            },{
+            },
+            {
                 "command": "tci.pushNodejsApp",
                 "title": "Push Node.js app to TCI",
                 "category": "TCI"
-            },{
+            },
+            {
+                "command": "tci.createNodejsApp",
+                "title": "Create a new Node.js app",
+                "category": "TCI"
+            },
+            {
                 "command": "tci.launchNodeAppLocally",
                 "title": "Launch Node.js app locally (runs npm install and node . in a terminal)",
                 "category": "TCI"
-            },{
+            },
+            {
                 "command": "tci.launchTIBCOCommunity",
                 "title": "Open TIBCO Community",
                 "category": "TCI"
-            },{
+            },
+            {
                 "command": "tci.launchTCIDocs",
                 "title": "Open TIBCO Cloud Integration documentation",
                 "category": "TCI"
@@ -76,5 +88,12 @@
         "eslint": "^3.6.0",
         "@types/node": "^6.0.40",
         "@types/mocha": "^2.2.32"
-    }
+    },"bugs": {
+        "url": "https://github.com/TIBCOSoftware/vscode-extension-tci/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/TIBCOSoftware/vscode-extension-tci.git"
+    },
+    "homepage": "https://github.com/TIBCOSoftware/vscode-extension-tci/blob/master/README.md"
 }

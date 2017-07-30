@@ -1,0 +1,10 @@
+{
+    "name": "%%APPNAME%%",
+    "description": "%%APPNAME%%",
+    "version": "%%APPVERSION%%",
+    "author": "Author <author@example.com>",
+    "dependencies": {
+        "swaggerize-express": "^4.0.0"
+    },
+    "main": "./server"
+}
