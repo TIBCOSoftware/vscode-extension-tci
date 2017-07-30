@@ -44,6 +44,9 @@ Feel free to open a Github issue or ask a question on the [TIBCO Community](http
 
 ## Release Notes
 
+### 0.1.1
+Removed config.json in favor of .env file to work with process.env context
+
 ### 0.1.0
 Added ability to create a new Node.js app and refactored code for maintanance purposes
 

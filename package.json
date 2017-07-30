@@ -2,7 +2,7 @@
     "name": "tci-tools",
     "displayName": "TCI Tools",
     "description": "TIBCO Cloud Integration Tools for VS Code",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "publisher": "retgits",
     "engines": {
         "vscode": "^1.10.0"

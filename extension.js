@@ -292,8 +292,8 @@ function activate(context) {
         loggerJsContent = fs.readFileSync(extension.extensionPath + '/templates/logger.js', 'utf-8');
         fs.writeFileSync(vscode.workspace.rootPath + '/' + appName + '/util/logger.js', loggerJsContent, 'utf-8');
 
-        configJsonContent = fs.readFileSync(extension.extensionPath + '/templates/config.json', 'utf-8');
-        fs.writeFileSync(vscode.workspace.rootPath + '/' + appName + '/config.json', configJsonContent, 'utf-8');
+        configContent = fs.readFileSync(extension.extensionPath + '/templates/dotenv', 'utf-8');
+        fs.writeFileSync(vscode.workspace.rootPath + '/' + appName + '/.env', configContent, 'utf-8');
 
         serverJsContent = fs.readFileSync(extension.extensionPath + '/templates/server.js', 'utf-8');
         fs.writeFileSync(vscode.workspace.rootPath + '/' + appName + '/server.js', serverJsContent, 'utf-8');

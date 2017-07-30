@@ -1,7 +1,10 @@
 # Change Log
 All notable changes to the "tci-tools" extension will be documented in this file.
 
-## 0.1.0 [current]
+## 0.1.1 [current]
+Removed config.json in favor of .env file to work with process.env context
+
+## 0.1.0
 Added ability to create a new Node.js app and refactored code for maintanance purposes
 
 ## 0.0.3
