@@ -19,6 +19,8 @@ This command simply launches a browser window and opens the documentation for TI
 The TIBCO Community is a great place to get in contact with experts on TIBCO Cloud Integration. If you have a question, you can post it there too!
 ### Push Node.js app to TCI
 Push your Node.js app to TIBCO Cloud Integration!
+### Add environment variable
+Add a new Environment variable to the manifest.json file so you can use it in your Node.js code with the `process.env` context
 
 ## Requirements
 To use this extension you need a valid account to TIBCO Cloud Integration (you can sign up at https://cloud.tibco.com/free-trial) and the `tibcli` utility (see https://integration.cloud.tibco.com/docs/getstarted/installation/download-tools.html for details)
@@ -30,7 +32,7 @@ This extension contributes the following settings:
 ## Installing the extension
 You can install the extension using the VS Code --install-extension command line switch
 ```
-code --install-extension tci-tools-0.1.0.vsix
+code --install-extension tci-tools-0.2.0.vsix
 ```
 
 ## Supported systems
@@ -43,6 +45,9 @@ Feel free to open a Github issue or ask a question on the [TIBCO Community](http
 [Leon Stigter](https://github.com/retgits)
 
 ## Release Notes
+
+### 0.2.0
+Added the ability to add Environment variables to the manifest, which can be used by `process.env`
 
 ### 0.1.1
 Removed config.json in favor of .env file to work with process.env context

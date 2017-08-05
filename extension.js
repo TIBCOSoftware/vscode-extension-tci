@@ -54,6 +54,9 @@ function activate(context) {
 
         disposable = vscode.commands.registerCommand('tci.checkInstallationStatus', cmdCheckInstallationStatus);
         context.subscriptions.push(disposable);
+
+        disposable = vscode.commands.registerCommand('tci.addEnvVar', cmdAddEnvVar);
+        context.subscriptions.push(disposable);
     }
 
     /**
@@ -61,6 +64,47 @@ function activate(context) {
      */
     function cmdCheckInstallationStatus() {
         checkTibcli(true);
+    }
+
+    /**
+     * Adds a new Environment Variable to the manifest.json file
+     */
+    function cmdAddEnvVar() {
+        var manifestFile = '';
+
+        // manifest can only be in workspace root or the parent folder of that
+        if (fs.existsSync(vscode.workspace.rootPath + '/manifest.json')) {
+            manifestFile = vscode.workspace.rootPath + '/manifest.json';
+        } else {
+            manifestFile = vscode.workspace.rootPath + '/../manifest.json'; 
+        }
+
+        vscode.window.showInputBox({
+            prompt: 'Please enter the name and type of your new Env var.',
+            placeHolder: 'DB_USER string'
+        }).then(vardetails => {
+            if (vardetails.split(' ').length != 2) {
+                vscode.window.showErrorMessage(vardetails + ' is not a valid name and type.');
+                return;
+            } else {
+                var details = vardetails.split(' ');
+                var manifestContent = JSON.parse(fs.readFileSync(manifestFile, 'utf8'));
+                var propertiesSection = manifestContent.properties
+
+                if (propertiesSection == null) {
+                    propertiesSection = [];
+                    var newProp = JSON.parse('{"name" : "' + details[0] + '","datatype" : "' + details[1] + '","default" : ""}')
+                    propertiesSection.push(newProp);
+                } else {
+                    var newProp = JSON.parse('{"name" : "' + details[0] + '","datatype" : "' + details[1] + '","default" : ""}')
+                    propertiesSection.push(newProp);
+                }
+
+                manifestContent.properties = propertiesSection
+
+                fs.writeFileSync(manifestFile, JSON.stringify(manifestContent), 'utf8');
+            }
+        });
     }
 
     /**

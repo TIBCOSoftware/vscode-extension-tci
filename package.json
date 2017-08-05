@@ -2,7 +2,7 @@
     "name": "tci-tools",
     "displayName": "TCI Tools",
     "description": "TIBCO Cloud Integration Tools for VS Code",
-    "version": "0.1.1",
+    "version": "0.2.0",
     "publisher": "retgits",
     "engines": {
         "vscode": "^1.10.0"
@@ -18,7 +18,8 @@
         "onCommand:tci.launchNodeAppLocally",
         "onCommand:tci.launchTIBCOCommunity",
         "onCommand:tci.launchTCIDocs",
-        "onCommand:tci.createNodejsApp"
+        "onCommand:tci.createNodejsApp",
+        "onCommand:tci.addEnvVar"
     ],
     "license": "SEE LICENSE IN README.md",
     "main": "./extension",
@@ -62,6 +63,10 @@
             {
                 "command": "tci.launchTCIDocs",
                 "title": "Open TIBCO Cloud Integration documentation",
+                "category": "TCI"
+            },{
+                "command": "tci.addEnvVar",
+                "title": "Add environment variable",
                 "category": "TCI"
             }
         ],
