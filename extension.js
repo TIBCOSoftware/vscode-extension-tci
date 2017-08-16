@@ -76,7 +76,8 @@ function activate(context) {
         if (fs.existsSync(vscode.workspace.rootPath + '/manifest.json')) {
             manifestFile = vscode.workspace.rootPath + '/manifest.json';
         } else {
-            manifestFile = vscode.workspace.rootPath + '/../manifest.json'; 
+            manifestFile = vscode.workspace.rootPath + '/../manifest.json';
+            var parentDir = path.resolve(process.cwd(), '..');
         }
 
         vscode.window.showInputBox({
