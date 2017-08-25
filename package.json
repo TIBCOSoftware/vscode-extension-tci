@@ -2,7 +2,7 @@
     "name": "tci-tools",
     "displayName": "TCI Tools",
     "description": "TIBCO Cloud Integration Tools for VS Code",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "publisher": "retgits",
     "engines": {
         "vscode": "^1.10.0"
@@ -11,61 +11,68 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:tci.checkInstallationStatus",
-        "onCommand:tci.launchAPIModeler",
-        "onCommand:tci.createDeploymentArtifacts",
-        "onCommand:tci.pushNodejsApp",
-        "onCommand:tci.launchNodeAppLocally",
-        "onCommand:tci.launchTIBCOCommunity",
-        "onCommand:tci.launchTCIDocs",
-        "onCommand:tci.createNodejsApp",
-        "onCommand:tci.addEnvVar"
+        "onCommand:tci.cmdCheckInstallationStatus",
+        "onCommand:tci.cmdCheckExtensionVersion",
+        "onCommand:tci.cmdLaunchAPIModeler",
+        "onCommand:tci.cmdLaunchTIBCOCommunity",
+        "onCommand:tci.cmdLaunchTCIDocs",
+        "onCommand:tci.cmdCreateDeploymentArtifacts",
+        "onCommand:tci.cmdCreateNodejsApp",
+        "onCommand:tci.cmdPushNodejsApp",
+        "onCommand:tci.cmdRunNodeApp",
+        "onCommand:tci.cmdAddPropertyToManifest"
     ],
-    "license": "SEE LICENSE IN README.md",
+    "license": "see license in readme.md",
     "main": "./extension",
     "contributes": {
         "commands": [
             {
-                "command": "tci.checkInstallationStatus",
+                "command": "tci.cmdCheckInstallationStatus",
                 "title": "Check installation status",
                 "category": "TCI"
             },
             {
-                "command": "tci.launchAPIModeler",
+                "command": "tci.cmdCheckExtensionVersion",
+                "title": "Display the version of TCI Tools",
+                "category": "TCI"
+            },
+            {
+                "command": "tci.cmdLaunchAPIModeler",
                 "title": "Open API Modeler",
                 "category": "TCI"
             },
             {
-                "command": "tci.createDeploymentArtifacts",
-                "title": "Create deployment artifacts",
-                "category": "TCI"
-            },
-            {
-                "command": "tci.pushNodejsApp",
-                "title": "Push Node.js app to TCI",
-                "category": "TCI"
-            },
-            {
-                "command": "tci.createNodejsApp",
-                "title": "Create a new Node.js app",
-                "category": "TCI"
-            },
-            {
-                "command": "tci.launchNodeAppLocally",
-                "title": "Launch Node.js app locally (runs npm install and node . in a terminal)",
-                "category": "TCI"
-            },
-            {
-                "command": "tci.launchTIBCOCommunity",
+                "command": "tci.cmdLaunchTIBCOCommunity",
                 "title": "Open TIBCO Community",
                 "category": "TCI"
             },
             {
-                "command": "tci.launchTCIDocs",
+                "command": "tci.cmdLaunchTCIDocs",
                 "title": "Open TIBCO Cloud Integration documentation",
                 "category": "TCI"
-            },{
-                "command": "tci.addEnvVar",
+            },
+            {
+                "command": "tci.cmdCreateDeploymentArtifacts",
+                "title": "Create deployment artifacts",
+                "category": "TCI"
+            },
+            {
+                "command": "tci.cmdCreateNodejsApp",
+                "title": "Create a new Node.js app",
+                "category": "TCI"
+            },
+            {
+                "command": "tci.cmdPushNodejsApp",
+                "title": "Push Node.js app to TCI",
+                "category": "TCI"
+            },
+            {
+                "command": "tci.cmdRunNodeApp",
+                "title": "Run Node.js app (runs npm install and node . in a terminal)",
+                "category": "TCI"
+            },
+            {
+                "command": "tci.cmdAddPropertyToManifest",
                 "title": "Add environment variable",
                 "category": "TCI"
             }
@@ -87,18 +94,25 @@
         "test": "node ./node_modules/vscode/bin/test"
     },
     "devDependencies": {
-        "typescript": "^2.0.3",
-        "vscode": "^1.0.0",
-        "mocha": "^2.3.3",
-        "eslint": "^3.6.0",
+        "@types/mocha": "^2.2.32",
         "@types/node": "^6.0.40",
-        "@types/mocha": "^2.2.32"
-    },"bugs": {
+        "chai": "^4.1.1",
+        "eslint": "^3.6.0",
+        "mocha": "^2.5.3",
+        "rewire": "^2.5.2",
+        "typescript": "^2.0.3",
+        "vscode": "^1.1.5"
+    },
+    "bugs": {
         "url": "https://github.com/TIBCOSoftware/vscode-extension-tci/issues"
     },
     "repository": {
         "type": "git",
         "url": "https://github.com/TIBCOSoftware/vscode-extension-tci.git"
     },
-    "homepage": "https://github.com/TIBCOSoftware/vscode-extension-tci/blob/master/README.md"
+    "homepage": "https://github.com/TIBCOSoftware/vscode-extension-tci/blob/master/README.md",
+    "dependencies": {
+        "fs-extra": "^4.0.1",
+        "klaw-sync": "^3.0.0"
+    }
 }

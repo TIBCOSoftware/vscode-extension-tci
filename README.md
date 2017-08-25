@@ -21,6 +21,8 @@ The TIBCO Community is a great place to get in contact with experts on TIBCO Clo
 Push your Node.js app to TIBCO Cloud Integration!
 ### Add environment variable
 Add a new Environment variable to the manifest.json file so you can use it in your Node.js code with the `process.env` context
+### Display version
+Display the version of the extension you're running.
 
 ## Requirements
 To use this extension you need a valid account to TIBCO Cloud Integration (you can sign up at https://cloud.tibco.com/free-trial) and the `tibcli` utility (see https://integration.cloud.tibco.com/docs/getstarted/installation/download-tools.html for details)
@@ -32,7 +34,7 @@ This extension contributes the following settings:
 ## Installing the extension
 You can install the extension using the VS Code --install-extension command line switch
 ```
-code --install-extension tci-tools-0.2.0.vsix
+code --install-extension tci-tools-0.3.0.vsix
 ```
 
 ## Supported systems
@@ -45,6 +47,9 @@ Feel free to open a Github issue or ask a question on the [TIBCO Community](http
 [Leon Stigter](https://github.com/retgits)
 
 ## Release Notes
+
+### 0.3.0 [current]
+Refactored core extension and added unit test cases
 
 ### 0.2.0
 Added the ability to add Environment variables to the manifest, which can be used by `process.env`

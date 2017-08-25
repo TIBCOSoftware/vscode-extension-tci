@@ -1,4 +1,63 @@
-/**
+/*
+ * Copyright © 2017. TIBCO Software Inc.
+ * This file is subject to the license terms contained
+ * in the license file that is distributed with this file.
+ */
+
+module.exports.dotenv = 'HTTP_PORT=8000'
+
+module.exports.serverjs = `'use strict';
+
+require('dotenv').config();
+
+var Logger = require('./util/logger');
+
+// Log Hello World
+// Logger.log(Logger.LOG_INFO, 'Hello World')
+
+// Get the HTTP port number
+// const httpport = process.env.HTTP_PORT
+// Logger.log(Logger.LOG_INFO, httpport)`
+
+module.exports.packagejson = `{
+    "name": "%%APPNAME%%",
+    "description": "%%APPNAME%%",
+    "version": "%%APPVERSION%%",
+    "author": "Author <author@example.com>",
+    "dependencies": {
+        "dotenv": "^4.0.0",
+        "swaggerize-express": "^4.0.0"
+    },
+    "main": "./server"
+}`
+
+module.exports.manifestjson = `{
+    "name": "%%APPNAME%%",
+    "description": "%%APPNAME%% description",
+    "version": "%%APPVERSION%%",
+    "type": "nodejs-app",
+    "resources": {
+        "physicalMemory": 1024,
+        "totalMemory": 4096,
+        "cpuQuota": 25
+    },
+    "endpoints": [
+        {
+            "primary": true,
+            "protocol": "http",
+            "port": "8000",
+            "public": true,
+            "type": "public",
+            "pingable": false,
+            "spec": {
+                "name": "%%APPNAME%%",
+                "version": "%%APPVERSION%%"
+            }
+        }
+    ]
+}`
+
+module.exports.loggerjs = `/**
  * Created by huanli<huali@tibco-support.com> on 3/9/17.
  *
  * Variable prefixes' meanings:
@@ -75,3 +134,4 @@ function pad3Digits(nMilliseconds) {
     return nMilliseconds;
   }
 }
+`
