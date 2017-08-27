@@ -1,6 +1,9 @@
 # Release Notes
 
-## 0.3.0 [current]
+## 0.3.1 [current]
+Fixed bugs
+
+## 0.3.0
 Refactored core extension and added unit test cases
 
 ## 0.2.0

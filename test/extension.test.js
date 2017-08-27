@@ -159,4 +159,8 @@ suite('Scenario checks', function () {
     test('Create deployment artifacts', function () {
         tools.createDeploymentArtifacts(WORKSPACE_ROOT); 
     });
+
+    test('Create deployment artifacts - second time to check overwrite', function () {
+        tools.createDeploymentArtifacts(WORKSPACE_ROOT); 
+    });
 });

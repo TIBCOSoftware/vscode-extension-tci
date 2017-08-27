@@ -17,7 +17,7 @@ var templates = require('./tibcli-node-templates');
  * The details of the tci-tools extension
  */
 var extension = {
-    'version': '0.3.0',
+    'version': '0.3.1',
     'name': 'tci-tools',
     'publisher': 'retgits'
 };
@@ -100,32 +100,27 @@ function createDeploymentArtifacts(workspaceRootFolder) {
 
     if (appRootFolder != null) {
         if (appRootFolder == workspaceRootFolder) {
-            fs.mkdirSync(workspaceRootFolder + '/../deployment');
+            fs.mkdirsSync(workspaceRootFolder + '/../deployment');
             deploymentFolder = path.join(workspaceRootFolder + '/../deployment');
         } else {
-            fs.mkdirSync(workspaceRootFolder + '/deployment');
+            fs.mkdirsSync(workspaceRootFolder + '/deployment');
             deploymentFolder = path.join(workspaceRootFolder + '/deployment');
         }
     } else {
         return;
     }
 
-    fs.copy(appRootFolder + '/../manifest.json', appRootFolder + '/../deployment/manifest.json', function (err) {
-        if (err) {
-            outputChannel.show();
-            outputChannel.appendLine(err);
-        }
-    });
+    fs.copySync(appRootFolder + '/../manifest.json', appRootFolder + '/../deployment/manifest.json',{overwrite: true});
 
     var spawn = require("child_process").spawn, child;
     var child = null;
 
     if (/^win/.test(process.platform)) {
-        child = spawn("powershell.exe", ['Get-ChildItem ' + appRootFolder + ' | where { $_.Name -notin "node_modules"} | Compress-Archive -DestinationPath ' + appRootFolder + '/../deployment/app.zip -Force']);
+        child = spawn("powershell.exe", ['Get-ChildItem ' + appRootFolder + ' | where { $_.Name -notin "node_modules"} | Compress-Archive -DestinationPath ' + appRootFolder + '/../deployment/app.zip -Force'],{cwd: appRootFolder});
     } else if (/^darwin/.test(process.platform)) {
-        child = spawn("zip", ['-r', '-X', appRootFolder + '/../deployment/app.zip', appRootFolder, '-x', '"node_modules"']);
+        child = spawn("zip", ['-r', '-X', appRootFolder + '/../deployment/app.zip', appRootFolder, '-x', '"node_modules"'],{cwd: appRootFolder});
     } else if (/^linux/.test(process.platform)) {
-        child = spawn("zip", ['-r', '-X', appRootFolder + '/../deployment/app.zip', appRootFolder, '-x', '"node_modules"']);
+        child = spawn("zip", ['-r', '-X', appRootFolder + '/../deployment/app.zip', appRootFolder, '-x', '"node_modules"'],{cwd: appRootFolder});
     } else {
         vscode.window.showErrorMessage('This command is not supported on ' + process.platform);
     }
