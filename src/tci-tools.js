@@ -17,7 +17,7 @@ var templates = require('./tibcli-node-templates');
  * The details of the tci-tools extension
  */
 var extension = {
-    'version': '0.3.1',
+    'version': '0.3.2',
     'name': 'tci-tools',
     'publisher': 'retgits'
 };
@@ -118,9 +118,9 @@ function createDeploymentArtifacts(workspaceRootFolder) {
     if (/^win/.test(process.platform)) {
         child = spawn("powershell.exe", ['Get-ChildItem ' + appRootFolder + ' | where { $_.Name -notin "node_modules"} | Compress-Archive -DestinationPath ' + appRootFolder + '/../deployment/app.zip -Force'],{cwd: appRootFolder});
     } else if (/^darwin/.test(process.platform)) {
-        child = spawn("zip", ['-r', '-X', appRootFolder + '/../deployment/app.zip', appRootFolder, '-x', '"node_modules"'],{cwd: appRootFolder});
+        child = spawn("zip", ['-r', '-X', appRootFolder + '/../deployment/app.zip', '.', '-x', '"node_modules"'],{cwd: appRootFolder});
     } else if (/^linux/.test(process.platform)) {
-        child = spawn("zip", ['-r', '-X', appRootFolder + '/../deployment/app.zip', appRootFolder, '-x', '"node_modules"'],{cwd: appRootFolder});
+        child = spawn("zip", ['-r', '-X', appRootFolder + '/../deployment/app.zip', '.', '-x', '"node_modules"'],{cwd: appRootFolder});
     } else {
         vscode.window.showErrorMessage('This command is not supported on ' + process.platform);
     }

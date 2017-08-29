@@ -1,6 +1,6 @@
 # Release Notes
 
-## 0.3.1 [current]
+## 0.3.2 [current]
 Fixed bugs
 
 ## 0.3.0
