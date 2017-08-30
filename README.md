@@ -34,6 +34,13 @@ This release has been tested on Microsoft Windows 10 (with PowerShell) and macOS
 ## Questions?
 Feel free to open a Github issue or ask a question on the [TIBCO Community](https://community.tibco.com)
 
+## Other TIBCO Cloud Integration repos
+You might also want to visit our other repos
+* [tci-awesome](https://github.com/TIBCOSoftware/tci-awesome), a curated set of awesome projects built on TIBCO Cloud Integration
+* [Connectors for TIBCO Business Studio - Cloud Edition](https://github.com/TIBCOSoftware/tci-studio-samples)
+* [tci-webintegrator](https://github.com/TIBCOSoftware/tci-webintegrator), the SDK to build cool extensions for our Web Integrator
+* [Command Line Interface for Node.js](https://github.com/TIBCOSoftware/tibcli-node)
+
 ## Contributors
 [Leon Stigter](https://github.com/retgits)
 
