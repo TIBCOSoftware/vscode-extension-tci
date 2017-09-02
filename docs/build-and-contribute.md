@@ -20,7 +20,7 @@ If you make changes, please be sure to update the test cases in `/test/extension
 
 ## Linting
 This project uses the Google style guide for JavaScript with some notable exceptions:
-* The linebreak style is set to Windows
+* The linebreak style check is turned off
 * Switch colon spacing is turned off
 * Max line length is turned off
 

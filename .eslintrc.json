@@ -20,7 +20,7 @@
         "no-unused-vars": "warn",
         "constructor-super": "warn",
         "valid-typeof": "warn",
-        "linebreak-style": ["error", "windows"],
+        "linebreak-style": 0,
         "switch-colon-spacing": 0
     }
 }
