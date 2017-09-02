@@ -10,6 +10,10 @@ before_install:
       sleep 3;
     fi
 
+branches:
+  except:
+  - /^v.*/
+
 install:
   - npm install
   - npm run vscode:prepublish
