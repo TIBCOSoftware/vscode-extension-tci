@@ -4,7 +4,9 @@
  * in the license file that is distributed with this file.
  */
 
-module.exports.dotenv = 'HTTP_PORT=8000'
+/* eslint-disable max-len */
+
+module.exports.dotenv = 'HTTP_PORT=8000';
 
 module.exports.serverjs = `'use strict';
 
@@ -17,7 +19,7 @@ var Logger = require('./util/logger');
 
 // Get the HTTP port number
 // const httpport = process.env.HTTP_PORT
-// Logger.log(Logger.LOG_INFO, httpport)`
+// Logger.log(Logger.LOG_INFO, httpport)`;
 
 module.exports.packagejson = `{
     "name": "%%APPNAME%%",
@@ -29,7 +31,7 @@ module.exports.packagejson = `{
         "swaggerize-express": "^4.0.0"
     },
     "main": "./server"
-}`
+}`;
 
 module.exports.manifestjson = `{
     "name": "%%APPNAME%%",
@@ -55,7 +57,7 @@ module.exports.manifestjson = `{
             }
         }
     ]
-}`
+}`;
 
 module.exports.loggerjs = `/**
  * Created by huanli<huali@tibco-support.com> on 3/9/17.
@@ -134,4 +136,4 @@ function pad3Digits(nMilliseconds) {
     return nMilliseconds;
   }
 }
-`
+`;

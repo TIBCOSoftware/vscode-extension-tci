@@ -1,4 +1,10 @@
 # tci-tools
+
+![](https://travis-ci.org/TIBCOSoftware/vscode-extension-tci.svg)
+![](https://img.shields.io/badge/release-v0.3.3-blue.svg)
+![](https://img.shields.io/badge/dependencies-up%20to%20date-green.svg)
+![](https://img.shields.io/badge/license-BSD%20style-blue.svg)
+
 tci-tools is an extension for Microsoft Visual Studio Code which provides support for building awesome Node.js apps in TIBCO Cloud&trade; Integration. 
 
 ## Commands
@@ -27,6 +33,9 @@ You can install the extension using the VS Code --install-extension command line
 ```
 code --install-extension tci-tools-x.x.x.vsix
 ```
+
+## Building or contributing
+If you want to contribute to the extension or build your installer from the source, check out our [docs](docs/build-and-contribute.md)
 
 ## Supported systems
 This release has been tested on Microsoft Windows 10 (with PowerShell) and macOS 10.12 (with Bash)

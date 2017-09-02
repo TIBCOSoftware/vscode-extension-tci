@@ -5,6 +5,7 @@
         "es6": true,
         "node": true
     },
+    "extends": "google",
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
@@ -18,6 +19,8 @@
         "no-unreachable": "warn",
         "no-unused-vars": "warn",
         "constructor-super": "warn",
-        "valid-typeof": "warn"
+        "valid-typeof": "warn",
+        "linebreak-style": ["error", "windows"],
+        "switch-colon-spacing": 0
     }
 }

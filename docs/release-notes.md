@@ -1,6 +1,11 @@
 # Release Notes
 
-## 0.3.2 [current]
+## 0.3.3 [current]
+* Updated coding style to ESLint shareable config for the Google JavaScript style guide (ES2015+ version)
+* Added cool badges to the readme
+* Added automated builds using [Travis-CI](https://travis-ci.org)
+
+## 0.3.2
 Fixed bugs
 
 ## 0.3.0

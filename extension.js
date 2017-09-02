@@ -4,11 +4,14 @@
  * in the license file that is distributed with this file.
  */
 
+/* eslint-disable max-len */
+/* eslint-disable no-invalid-this */
+
 /**
  * Dependencies needed to run this extension
  */
-var vscode = require('vscode');
-var tools = require('./src/tci-tools');
+const vscode = require('vscode');
+const tools = require('./src/tci-tools');
 
 /**
  * This method is called when the extension is activated
@@ -16,8 +19,7 @@ var tools = require('./src/tci-tools');
  * @param {Context} context 
  */
 function activate(context) {
-
-    var disposable = vscode.commands.registerCommand('tci.cmdCheckInstallationStatus', cmdCheckInstallationStatus);
+    let disposable = vscode.commands.registerCommand('tci.cmdCheckInstallationStatus', cmdCheckInstallationStatus);
     context.subscriptions.push(disposable);
 
     disposable = vscode.commands.registerCommand('tci.cmdCheckExtensionVersion', cmdCheckExtensionVersion);
@@ -55,9 +57,9 @@ function cmdCheckInstallationStatus() {
     if (tools.checkTibcliExists(vscode.workspace.getConfiguration('tci').get('tibcli'))) {
         vscode.window.showInformationMessage('tibcli was found on your system. You\'re ready to go!');
     } else {
-        var messageItems = ['The tibcli location is not set or tibcli doesn\'t exist, visit ' + tools.urls.toolsDocs + ' for instructions']
+        let messageItems = ['The tibcli location is not set or tibcli doesn\'t exist, visit ' + tools.urls.toolsDocs + ' for instructions'];
         messageItems.push('Open in browser');
-        vscode.window.showErrorMessage.apply(this, messageItems).then(function (value) {
+        vscode.window.showErrorMessage.apply(this, messageItems).then(function(value) {
             if (value == 'Open in browser') {
                 tools.launchBrowserWithUrl(tools.urls.toolsDocs);
             }
@@ -106,15 +108,15 @@ function cmdCreateDeploymentArtifacts() {
 function cmdCreateNodejsApp() {
     vscode.window.showInputBox({
         prompt: 'Please enter the name and version of your new Node.js app.',
-        placeHolder: 'myApp 1.0.0'
-    }).then(appdetails => {
+        placeHolder: 'myApp 1.0.0',
+    }).then((appdetails) => {
         if (appdetails.split(' ').length != 2) {
             vscode.window.showErrorMessage(appdetails + ' is not a valid name and version.');
             return;
         } else {
-            var details = appdetails.split(' ');
-            tools.createNewNodejsApp(details[0], details[1], vscode.workspace.rootPath, function () {
-                vscode.workspace.openTextDocument(vscode.workspace.rootPath + '/' + details[0] + '/server.js').then(document => {
+            let details = appdetails.split(' ');
+            tools.createNewNodejsApp(details[0], details[1], vscode.workspace.rootPath, function() {
+                vscode.workspace.openTextDocument(vscode.workspace.rootPath + '/' + details[0] + '/server.js').then((document) => {
                     vscode.window.showTextDocument(document);
                 });
             });
@@ -129,9 +131,9 @@ function cmdPushNodejsApp() {
     if (tools.checkTibcliExists(vscode.workspace.getConfiguration('tci').get('tibcli'))) {
         tools.pushNodejsApp(vscode.workspace.rootPath, vscode.workspace.getConfiguration('tci').get('tibcli'));
     } else {
-        var messageItems = ['The tibcli location is not set or tibcli doesn\'t exist, visit ' + tools.urls.toolsDocs + ' for instructions']
+        let messageItems = ['The tibcli location is not set or tibcli doesn\'t exist, visit ' + tools.urls.toolsDocs + ' for instructions'];
         messageItems.push('Open in browser');
-        vscode.window.showErrorMessage.apply(this, messageItems).then(function (value) {
+        vscode.window.showErrorMessage.apply(this, messageItems).then(function(value) {
             if (value == 'Open in browser') {
                 tools.launchBrowserWithUrl(tools.urls.toolsDocs);
             }
@@ -152,13 +154,13 @@ function cmdRunNodeApp() {
 function cmdAddPropertyToManifest() {
     vscode.window.showInputBox({
         prompt: 'Please enter the name and type of your new Env var.',
-        placeHolder: 'DB_USER string'
-    }).then(vardetails => {
+        placeHolder: 'DB_USER string',
+    }).then((vardetails) => {
         if (vardetails.split(' ').length != 2) {
             vscode.window.showErrorMessage(vardetails + ' is not a valid name and type.');
             return;
         } else {
-            var details = vardetails.split(' ');
+            let details = vardetails.split(' ');
             tools.addPropertyToManifest(details[0], details[1], vscode.workspace.rootPath);
         }
     });

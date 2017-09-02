@@ -4,40 +4,41 @@
  * in the license file that is distributed with this file.
  */
 
+/* eslint-disable max-len */
+
 /**
  * Dependencies needed to run this extension
  */
-var vscode = require('vscode');
-var fs = require('fs-extra');
-var path = require('path');
-var klawSync = require('klaw-sync')
-var templates = require('./tibcli-node-templates');
+const vscode = require('vscode');
+const fs = require('fs-extra');
+const path = require('path');
+const klawSync = require('klaw-sync');
+const templates = require('./tibcli-node-templates');
 
 /**
  * The details of the tci-tools extension
  */
-var extension = {
-    'version': '0.3.2',
+const extension = {
+    'version': '0.3.3',
     'name': 'tci-tools',
-    'publisher': 'retgits'
+    'publisher': 'retgits',
 };
 
 /**
  * The URLs required by this extension
  */
-var urls = {
+const urls = {
     'tciDocs': 'https://integration.cloud.tibco.com/docs/index.html',
     'tciCommunity': 'https://community.tibco.com/products/tibco-cloud-integration',
     'apiModeler': 'https://integration.cloud.tibco.com/apispecs',
-    'toolsDocs': 'https://github.com/TIBCOSoftware/vscode-extension-tci'
+    'toolsDocs': 'https://github.com/TIBCOSoftware/vscode-extension-tci',
 };
 
 /**
  * Internal variables
  */
-var tibcli = false;
-var terminal = vscode.window.createTerminal('tci-tools');
-var outputChannel = vscode.window.createOutputChannel('tci-tools');
+const terminal = vscode.window.createTerminal('tci-tools');
+const outputChannel = vscode.window.createOutputChannel('tci-tools');
 
 /**
  * Opens the default webbrowser with the URL
@@ -49,9 +50,10 @@ function launchBrowserWithUrl(url) {
 
 /**
  * Runs the node app on the local machine
+ * @param {String} workspaceRootFolder
  */
 function runNodeApp(workspaceRootFolder) {
-    var appRootFolder = determineAppRootFolder(workspaceRootFolder, 'cmdRunNodeApp')
+    let appRootFolder = determineAppRootFolder(workspaceRootFolder, 'cmdRunNodeApp');
 
     if (appRootFolder != null) {
         terminal.show(true);
@@ -64,19 +66,22 @@ function runNodeApp(workspaceRootFolder) {
 /**
  * Determines the rootfolder of the Node.js app
  * This is determined by which folder contains package.json
+ * @param {String} workspaceRootFolder
+ * @param {String} cmdName
+ * @return {String} appRootFolder
  */
 function determineAppRootFolder(workspaceRootFolder, cmdName) {
     outputChannel.show();
     outputChannel.appendLine(`Finding root folder to execute ${cmdName}`);
 
-    var appRootFolder = null;
+    let appRootFolder = null;
 
     if (fs.existsSync(workspaceRootFolder + '/package.json')) {
         appRootFolder = workspaceRootFolder;
     }
 
-    var filterFunction = item => path.win32.basename(item.path) === 'package.json' && item.path.indexOf('node_modules') < 0;
-    var paths = klawSync(workspaceRootFolder, { filter: filterFunction });
+    let filterFunction = (item) => path.win32.basename(item.path) === 'package.json' && item.path.indexOf('node_modules') < 0;
+    let paths = klawSync(workspaceRootFolder, {filter: filterFunction});
 
     if (paths.length == 0) {
         vscode.window.showErrorMessage('We couldn\'t find the package.json file to determine the rootfolder ');
@@ -93,10 +98,11 @@ function determineAppRootFolder(workspaceRootFolder, cmdName) {
 /**
  * Creates the deployment artifact app.zip and moves that into a deployment folder
  * together with the manifest.json file
+ * @param {String} workspaceRootFolder
  */
 function createDeploymentArtifacts(workspaceRootFolder) {
-    var appRootFolder = determineAppRootFolder(workspaceRootFolder, 'cmdCreateDeploymentArtifacts');
-    var deploymentFolder = null;
+    let appRootFolder = determineAppRootFolder(workspaceRootFolder, 'cmdCreateDeploymentArtifacts');
+    let deploymentFolder = null;
 
     if (appRootFolder != null) {
         if (appRootFolder == workspaceRootFolder) {
@@ -110,26 +116,26 @@ function createDeploymentArtifacts(workspaceRootFolder) {
         return;
     }
 
-    fs.copySync(appRootFolder + '/../manifest.json', appRootFolder + '/../deployment/manifest.json',{overwrite: true});
+    fs.copySync(appRootFolder + '/../manifest.json', appRootFolder + '/../deployment/manifest.json', {overwrite: true});
 
-    var spawn = require("child_process").spawn, child;
-    var child = null;
+    let spawn = require('child_process').spawn;
+    let child = null;
 
     if (/^win/.test(process.platform)) {
-        child = spawn("powershell.exe", ['Get-ChildItem ' + appRootFolder + ' | where { $_.Name -notin "node_modules"} | Compress-Archive -DestinationPath ' + appRootFolder + '/../deployment/app.zip -Force'],{cwd: appRootFolder});
+        child = spawn('powershell.exe', ['Get-ChildItem ' + appRootFolder + ' | where { $_.Name -notin "node_modules"} | Compress-Archive -DestinationPath ' + appRootFolder + '/../deployment/app.zip -Force'], {cwd: appRootFolder});
     } else if (/^darwin/.test(process.platform)) {
-        child = spawn("zip", ['-r', '-X', appRootFolder + '/../deployment/app.zip', '.', '-x', '"node_modules"'],{cwd: appRootFolder});
+        child = spawn('zip', ['-r', '-X', appRootFolder + '/../deployment/app.zip', '.', '-x', '"node_modules"'], {cwd: appRootFolder});
     } else if (/^linux/.test(process.platform)) {
-        child = spawn("zip", ['-r', '-X', appRootFolder + '/../deployment/app.zip', '.', '-x', '"node_modules"'],{cwd: appRootFolder});
+        child = spawn('zip', ['-r', '-X', appRootFolder + '/../deployment/app.zip', '.', '-x', '"node_modules"'], {cwd: appRootFolder});
     } else {
         vscode.window.showErrorMessage('This command is not supported on ' + process.platform);
     }
 
-    child.stdout.on("data", function (data) {
+    child.stdout.on('data', function(data) {
         outputChannel.show();
         outputChannel.appendLine(data);
     });
-    child.stderr.on("data", function (data) {
+    child.stderr.on('data', function(data) {
         outputChannel.show();
         outputChannel.appendLine(data);
     });
@@ -143,6 +149,7 @@ function createDeploymentArtifacts(workspaceRootFolder) {
 /**
  * Checks whether the tibcli executable exists in that location.
  * @param {String} tibcli
+ * @return {Boolean} boolean
  */
 function checkTibcliExists(tibcli) {
     outputChannel.show();
@@ -150,32 +157,19 @@ function checkTibcliExists(tibcli) {
 
     if (tibcli == null || !fs.existsSync(tibcli)) {
         outputChannel.appendLine(`tibcli parameter was set to ${tibcli} but executable was not found`);
-        setTibcli(false);
         return false;
     } else {
         outputChannel.appendLine(`tibcli parameter was set to ${tibcli} and executable was found`);
-        setTibcli(true);
         return true;
     }
 };
 
 /**
- * Helper method to set the value of tibcli
- * @param {boolean} found 
- */
-function setTibcli(found) {
-    tibcliFound = found;
-};
-
-/**
- * Helper method to get the value of tibcli
- */
-function hasTibcli() {
-    return tibcli;
-};
-
-/**
  * Create a new Node.js app based on templates
+ * @param {String} appName
+ * @param {String} appVersion
+ * @param {String} rootPath
+ * @param {Function} callback
  */
 function createNewNodejsApp(appName, appVersion, rootPath, callback) {
     if (rootPath == null) {
@@ -194,27 +188,27 @@ function createNewNodejsApp(appName, appVersion, rootPath, callback) {
  * @param {Function} callback 
  */
 function writeTemplateFiles(appName, appVersion, rootPath, callback) {
-    manifestContent = templates.manifestjson
+    let manifestContent = templates.manifestjson;
     manifestContent = manifestContent.replace(/%%APPNAME%%/g, appName);
     manifestContent = manifestContent.replace(/%%APPVERSION%%/g, appVersion);
     fs.writeFileSync(path.join(rootPath, 'manifest.json'), manifestContent, 'utf-8');
 
 
-    fs.mkdirSync(path.join(rootPath, appName));
-    fs.mkdirSync(path.join(rootPath, appName, 'util'));
+    fs.mkdirsSync(path.join(rootPath, appName));
+    fs.mkdirsSync(path.join(rootPath, appName, 'util'));
 
-    packageJsonContent = templates.packagejson
+    let packageJsonContent = templates.packagejson;
     packageJsonContent = packageJsonContent.replace(/%%APPNAME%%/g, appName);
     packageJsonContent = packageJsonContent.replace(/%%APPVERSION%%/g, appVersion);
     fs.writeFileSync(path.join(rootPath, appName, 'package.json'), packageJsonContent, 'utf-8');
 
-    loggerJsContent = templates.loggerjs
+    let loggerJsContent = templates.loggerjs;
     fs.writeFileSync(path.join(rootPath, appName, 'util', 'logger.js'), loggerJsContent, 'utf-8');
 
-    configContent = templates.dotenv
+    let configContent = templates.dotenv;
     fs.writeFileSync(path.join(rootPath, appName, '.env'), configContent, 'utf-8');
 
-    serverJsContent = templates.serverjs
+    let serverJsContent = templates.serverjs;
     fs.writeFileSync(path.join(rootPath, appName, 'server.js'), serverJsContent, 'utf-8');
 
     callback(true);
@@ -222,17 +216,18 @@ function writeTemplateFiles(appName, appVersion, rootPath, callback) {
 
 /**
  * Pushes the Node.js app to TIBCO Cloud Integration using tibcli
+ * @param {String} workspaceRootFolder
+ * @param {String} tibcli
  */
 function pushNodejsApp(workspaceRootFolder, tibcli) {
-
     createDeploymentArtifacts(workspaceRootFolder);
 
-    var appRootFolder = determineAppRootFolder(workspaceRootFolder, 'cmdPushNodejsApp');
+    let appRootFolder = determineAppRootFolder(workspaceRootFolder, 'cmdPushNodejsApp');
 
     terminal.show(true);
 
     if (appRootFolder == workspaceRootFolder) {
-        var parentFolder = path.join(workspaceRootFolder, '..');
+        let parentFolder = path.join(workspaceRootFolder, '..');
         terminal.sendText('cd ' + parentFolder + '/deployment', true);
     } else {
         terminal.sendText('cd ' + workspaceRootFolder + '/deployment', true);
@@ -244,9 +239,12 @@ function pushNodejsApp(workspaceRootFolder, tibcli) {
 
 /**
  * Adds a new Environment Variable to the manifest.json file
+ * @param {String} propertyName
+ * @param {String} propertyType
+ * @param {String} workspaceRootFolder
  */
-function addPropertyToManifest (propertyName, propertyType, workspaceRootFolder) {
-    var manifestFile = '';
+function addPropertyToManifest(propertyName, propertyType, workspaceRootFolder) {
+    let manifestFile = '';
 
     // manifest can only be in workspace root or the parent folder of that
     if (fs.existsSync(workspaceRootFolder + '/manifest.json')) {
@@ -255,9 +253,9 @@ function addPropertyToManifest (propertyName, propertyType, workspaceRootFolder)
         manifestFile = workspaceRootFolder + '/../manifest.json';
     }
 
-    var manifestContent = JSON.parse(fs.readFileSync(manifestFile, 'utf8'));
-    var propertiesSection = manifestContent.properties;
-    var newProp = JSON.parse('{"name" : "' + propertyName + '","datatype" : "' + propertyType + '","default" : ""}');
+    let manifestContent = JSON.parse(fs.readFileSync(manifestFile, 'utf8'));
+    let propertiesSection = manifestContent.properties;
+    let newProp = JSON.parse('{"name" : "' + propertyName + '","datatype" : "' + propertyType + '","default" : ""}');
 
     if (propertiesSection == null) {
         propertiesSection = [];

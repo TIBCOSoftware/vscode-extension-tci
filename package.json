@@ -2,7 +2,7 @@
     "name": "tci-tools",
     "displayName": "TCI Tools",
     "description": "TIBCO Cloud Integration Tools for VS Code",
-    "version": "0.3.2",
+    "version": "0.3.3",
     "publisher": "retgits",
     "engines": {
         "vscode": "^1.10.0"
@@ -91,13 +91,15 @@
     },
     "scripts": {
         "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "node ./node_modules/vscode/bin/test"
+        "test": "node ./node_modules/vscode/bin/test",
+        "linter": "node_modules/.bin/eslint extension.js ./src"
     },
     "devDependencies": {
         "@types/mocha": "^2.2.32",
         "@types/node": "^6.0.40",
         "chai": "^4.1.1",
-        "eslint": "^3.6.0",
+        "eslint": "^4.5.0",
+        "eslint-config-google": "^0.9.1",
         "mocha": "^2.5.3",
         "rewire": "^2.5.2",
         "typescript": "^2.0.3",
