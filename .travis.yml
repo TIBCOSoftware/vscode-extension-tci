@@ -17,8 +17,8 @@ before_install:
     fi
 
 branches:
-  except:
-  - /^v.*/
+  only:
+  - master
 
 install:
   - npm install

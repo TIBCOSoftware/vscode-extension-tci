@@ -153,15 +153,15 @@ function cmdRunNodeApp() {
  */
 function cmdAddPropertyToManifest() {
     vscode.window.showInputBox({
-        prompt: 'Please enter the name and type of your new Env var.',
+        prompt: 'Please enter the name, type and default value of your new Env var.',
         placeHolder: 'DB_USER string',
     }).then((vardetails) => {
-        if (vardetails.split(' ').length != 2) {
-            vscode.window.showErrorMessage(vardetails + ' is not a valid name and type.');
+        if (vardetails.split(' ').length != 3) {
+            vscode.window.showErrorMessage(vardetails + ' is not a valid name, type and default value.');
             return;
         } else {
             let details = vardetails.split(' ');
-            tools.addPropertyToManifest(details[0], details[1], vscode.workspace.rootPath);
+            tools.addPropertyToManifest(details[0], details[1], details[2], vscode.workspace.rootPath);
         }
     });
 }

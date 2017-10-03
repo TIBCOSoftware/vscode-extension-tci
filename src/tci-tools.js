@@ -19,7 +19,7 @@ const templates = require('./tibcli-node-templates');
  * The details of the tci-tools extension
  */
 const extension = {
-    'version': '0.3.3',
+    'version': '0.4.1',
     'name': 'tci-tools',
     'publisher': 'retgits',
 };
@@ -241,9 +241,10 @@ function pushNodejsApp(workspaceRootFolder, tibcli) {
  * Adds a new Environment Variable to the manifest.json file
  * @param {String} propertyName
  * @param {String} propertyType
+ * @param {String} propertyDefaultValue
  * @param {String} workspaceRootFolder
  */
-function addPropertyToManifest(propertyName, propertyType, workspaceRootFolder) {
+function addPropertyToManifest(propertyName, propertyType, propertyDefaultValue, workspaceRootFolder) {
     let manifestFile = '';
 
     // manifest can only be in workspace root or the parent folder of that
@@ -255,7 +256,7 @@ function addPropertyToManifest(propertyName, propertyType, workspaceRootFolder) 
 
     let manifestContent = JSON.parse(fs.readFileSync(manifestFile, 'utf8'));
     let propertiesSection = manifestContent.properties;
-    let newProp = JSON.parse('{"name" : "' + propertyName + '","datatype" : "' + propertyType + '","default" : ""}');
+    let newProp = JSON.parse('{"name" : "' + propertyName + '","datatype" : "' + propertyType + '","default" : "' + propertyDefaultValue + '"}');
 
     if (propertiesSection == null) {
         propertiesSection = [];

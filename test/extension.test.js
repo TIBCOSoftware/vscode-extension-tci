@@ -147,7 +147,7 @@ suite('Scenario checks', function () {
     });
 
     test('Add property should work', function () {
-        tools.addPropertyToManifest('DB_USER', 'string', WORKSPACE_ROOT);
+        tools.addPropertyToManifest('DB_USER', 'string', 'admin', WORKSPACE_ROOT);
     });
 
     test('Properties section should exist', function () {

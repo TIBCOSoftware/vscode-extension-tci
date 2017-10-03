@@ -1,6 +1,10 @@
 # Release Notes
 
-## 0.3.3 [current]
+## 0.4.1 [current]
+* Updated version to match the [cli version](https://github.com/TIBCOSoftware/tibcli-node) of this tool
+* Added the ability to specify a default value for environment variables
+
+## 0.3.3
 * Updated coding style to ESLint shareable config for the Google JavaScript style guide (ES2015+ version)
 * Added cool badges to the readme
 * Added automated builds using [Travis-CI](https://travis-ci.org)
