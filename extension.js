@@ -16,7 +16,7 @@ const tools = require('./src/tci-tools');
 /**
  * This method is called when the extension is activated
  * The extension is activated the very first time the command is executed
- * @param {Context} context 
+ * @param {Context} context
  */
 function activate(context) {
     let disposable = vscode.commands.registerCommand('tci.cmdCheckInstallationStatus', cmdCheckInstallationStatus);

@@ -42,7 +42,7 @@ const outputChannel = vscode.window.createOutputChannel('tci-tools');
 
 /**
  * Opens the default webbrowser with the URL
- * @param {String} url 
+ * @param {String} url
  */
 function launchBrowserWithUrl(url) {
     vscode.commands.executeCommand('vscode.open', vscode.Uri.parse(url));
@@ -182,10 +182,10 @@ function createNewNodejsApp(appName, appVersion, rootPath, callback) {
 
 /**
  * Write the template files to the workspace location
- * @param {String} appName 
- * @param {String} appVersion 
- * @param {String} rootPath 
- * @param {Function} callback 
+ * @param {String} appName
+ * @param {String} appVersion
+ * @param {String} rootPath
+ * @param {Function} callback
  */
 function writeTemplateFiles(appName, appVersion, rootPath, callback) {
     let manifestContent = templates.manifestjson;
