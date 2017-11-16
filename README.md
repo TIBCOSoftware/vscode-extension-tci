@@ -29,10 +29,11 @@ This extension contributes the following settings:
 * `tci.tibcli`: The full qualified path to the tibcli executable (including .exe on Windows) which is set to `c:/tmp/tibcli.exe` by default
 
 ## Installing the extension
-You can install the extension using the VS Code --install-extension command line switch
+To install the extension you can download the latest version from the [releases](https://github.com/TIBCOSoftware/vscode-extension-tci/releases) section. You can install the extension using the VS Code --install-extension command line switch
 ```
 code --install-extension tci-tools-x.x.x.vsix
 ```
+_Note that you'll have to make sure that `code` is added to your path so you can use it from the console. You can find instructions on how to do that in the [VSCode docs](https://code.visualstudio.com/docs/setup/setup-overview)_
 
 ## Building or contributing
 If you want to contribute to the extension or build your installer from the source, check out our [docs](docs/build-and-contribute.md)
