@@ -16,7 +16,7 @@
 
 #### An extension for Microsoft Visual Studio Code which provides support for building awesome Node.js apps in TIBCO Cloud™ Integration.
 
-[<span>More information</span>](#info) [<span>Install VSCode Extension</span>](https://github.com/TIBCOSoftware/vscode-extension-tci/releases)</div>
+[<span>More information</span>](https://github.com/TIBCOSoftware/vscode-extension-tci) [<span>Install VSCode Extension</span>](https://github.com/TIBCOSoftware/vscode-extension-tci/releases)</div>
 
 </div>
 
@@ -30,7 +30,7 @@
 
 #### The CLI to build code in the way you want and with the tools that you like best for Node.js apps in TIBCO Cloud™ Integration!
 
-[<span>More information</span>](#info) [<span>Install tibcli-node</span>](https://github.com/TIBCOSoftware/tibcli-node/releases)</div>
+[<span>More information</span>](https://github.com/TIBCOSoftware/tibcli-node) [<span>Install tibcli-node</span>](https://www.npmjs.com/package/tibcli-node)</div>
 
 </div>
 
@@ -120,7 +120,7 @@ Push your Node.js app to TIBCO Cloud Integration and your apps on a world class 
 
 <div class="text-center hidden-sm">![](build/images/laptop.png)
 
-[<span>Install VSCode Extension</span>](https://github.com/TIBCOSoftware/vscode-extension-tci/releases) [<span>Install tibcli-node</span>](https://github.com/TIBCOSoftware/tibcli-node/releases)
+[<span>Install VSCode Extension</span>](https://github.com/TIBCOSoftware/vscode-extension-tci/releases) [<span>Install tibcli-node</span>](https://www.npmjs.com/package/tibcli-node)
 
 </div>
 
