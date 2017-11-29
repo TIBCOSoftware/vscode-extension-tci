@@ -1,0 +1,18 @@
+{
+    "urls":{
+        "us": {
+            "apimodeler": "https://integration.cloud.tibco.com/apispecs",
+            "tcidocs": "https://integration.cloud.tibco.com/docs/index.html"
+        },
+        "eu": {
+            "apimodeler": "https://eu.integration.cloud.tibco.com/apispecs",
+            "tcidocs": "https://eu.integration.cloud.tibco.com/docs/index.html"
+        },
+        "au": {
+            "apimodeler": "https://au.integration.cloud.tibco.com/apispecs",
+            "tcidocs": "https://au.integration.cloud.tibco.com/docs/index.html"
+        },
+        "community": "https://community.tibco.com/products/tibco-cloud-integration",
+        "tooldocs": "https://github.com/TIBCOSoftware/vscode-extension-tci"
+    }
+}

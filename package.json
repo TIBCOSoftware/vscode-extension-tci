@@ -1,26 +1,17 @@
 {
-    "name": "tci-tools",
-    "displayName": "TCI Tools",
-    "description": "TIBCO Cloud Integration Tools for VS Code",
-    "version": "0.4.1",
+    "name": "tcitools",
+    "displayName": "TCI Tools for Node.js",
+    "description": "TIBCO Cloud Integration Node.js Tools for VS Code",
+    "version": "0.5.0",
     "publisher": "retgits",
     "engines": {
-        "vscode": "^1.10.0"
+        "vscode": "^1.18.0"
     },
     "categories": [
         "Other"
     ],
     "activationEvents": [
-        "onCommand:tci.cmdCheckInstallationStatus",
-        "onCommand:tci.cmdCheckExtensionVersion",
-        "onCommand:tci.cmdLaunchAPIModeler",
-        "onCommand:tci.cmdLaunchTIBCOCommunity",
-        "onCommand:tci.cmdLaunchTCIDocs",
-        "onCommand:tci.cmdCreateDeploymentArtifacts",
-        "onCommand:tci.cmdCreateNodejsApp",
-        "onCommand:tci.cmdPushNodejsApp",
-        "onCommand:tci.cmdRunNodeApp",
-        "onCommand:tci.cmdAddPropertyToManifest"
+        "*"
     ],
     "license": "see license in readme.md",
     "main": "./extension",
@@ -32,47 +23,42 @@
                 "category": "TCI"
             },
             {
-                "command": "tci.cmdCheckExtensionVersion",
-                "title": "Display the version of TCI Tools",
-                "category": "TCI"
-            },
-            {
                 "command": "tci.cmdLaunchAPIModeler",
-                "title": "Open API Modeler",
+                "title": "Open API Modeler (in a web browser)",
                 "category": "TCI"
             },
             {
                 "command": "tci.cmdLaunchTIBCOCommunity",
-                "title": "Open TIBCO Community",
+                "title": "Open TIBCO Community (in a web browser)",
                 "category": "TCI"
             },
             {
                 "command": "tci.cmdLaunchTCIDocs",
-                "title": "Open TIBCO Cloud Integration documentation",
+                "title": "Open TIBCO Cloud Integration documentation (in a web browser)",
                 "category": "TCI"
             },
             {
-                "command": "tci.cmdCreateDeploymentArtifacts",
-                "title": "Create deployment artifacts",
+                "command": "tci.cmdCreateZip",
+                "title": "Create zip for deployment",
                 "category": "TCI"
             },
             {
-                "command": "tci.cmdCreateNodejsApp",
+                "command": "tci.cmdCreateApp",
                 "title": "Create a new Node.js app",
                 "category": "TCI"
             },
             {
-                "command": "tci.cmdPushNodejsApp",
+                "command": "tci.cmdPushApp",
                 "title": "Push Node.js app to TCI",
                 "category": "TCI"
             },
             {
-                "command": "tci.cmdRunNodeApp",
+                "command": "tci.cmdRunApp",
                 "title": "Run Node.js app (runs npm install and node . in a terminal)",
                 "category": "TCI"
             },
             {
-                "command": "tci.cmdAddPropertyToManifest",
+                "command": "tci.cmdAddProperty",
                 "title": "Add environment variable",
                 "category": "TCI"
             }
@@ -85,6 +71,11 @@
                     "type": "string",
                     "default": "c:/tmp/tibcli.exe",
                     "description": "The full qualified path to the tibcli executable (including .exe on Windows)"
+                },
+                "tci.region": {
+                    "type": "string",
+                    "default": "us",
+                    "description": "The region of TCI your account is in (e.g. us, eu or au)"
                 }
             }
         }
@@ -112,9 +103,20 @@
         "type": "git",
         "url": "https://github.com/TIBCOSoftware/vscode-extension-tci.git"
     },
-    "homepage": "https://github.com/TIBCOSoftware/vscode-extension-tci/blob/master/README.md",
+    "homepage": "https://tibcosoftware.github.com/vscode-extension-tci",
     "dependencies": {
+        "archiver": "^2.1.0",
         "fs-extra": "^4.0.1",
-        "klaw-sync": "^3.0.0"
-    }
+        "klaw-sync": "^3.0.2"
+    },
+    "galleryBanner": {
+        "color": "#f2f2f2",
+        "theme": "dark"
+    },
+    "icon": "images/icon.png",
+    "keywords": [
+        "TIBCO",
+        "TCI",
+        "node.js"
+    ]
 }

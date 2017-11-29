@@ -24,5 +24,4 @@ install:
   - npm install
 
 script:
-  - npm test --silent
   - npm run-script linter

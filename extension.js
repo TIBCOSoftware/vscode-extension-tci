@@ -5,13 +5,13 @@
  */
 
 /* eslint-disable max-len */
-/* eslint-disable no-invalid-this */
 
 /**
- * Dependencies needed to run this extension
+ * Requires
  */
+const tcitools = require('./src/tcitools');
+const path = require('path');
 const vscode = require('vscode');
-const tools = require('./src/tci-tools');
 
 /**
  * This method is called when the extension is activated
@@ -19,149 +19,163 @@ const tools = require('./src/tci-tools');
  * @param {Context} context
  */
 function activate(context) {
-    let disposable = vscode.commands.registerCommand('tci.cmdCheckInstallationStatus', cmdCheckInstallationStatus);
+    let disposable = vscode.commands.registerCommand(
+        'tci.cmdCheckInstallationStatus', cmdCheckInstallationStatus);
     context.subscriptions.push(disposable);
 
-    disposable = vscode.commands.registerCommand('tci.cmdCheckExtensionVersion', cmdCheckExtensionVersion);
+    disposable = vscode.commands.registerCommand(
+        'tci.cmdLaunchAPIModeler', cmdLaunchAPIModeler);
     context.subscriptions.push(disposable);
 
-    disposable = vscode.commands.registerCommand('tci.cmdLaunchAPIModeler', cmdLaunchAPIModeler);
+    disposable = vscode.commands.registerCommand(
+        'tci.cmdLaunchTIBCOCommunity', cmdLaunchTIBCOCommunity);
     context.subscriptions.push(disposable);
 
-    disposable = vscode.commands.registerCommand('tci.cmdLaunchTIBCOCommunity', cmdLaunchTIBCOCommunity);
+    disposable = vscode.commands.registerCommand(
+        'tci.cmdLaunchTCIDocs', cmdLaunchTCIDocs);
     context.subscriptions.push(disposable);
 
-    disposable = vscode.commands.registerCommand('tci.cmdLaunchTCIDocs', cmdLaunchTCIDocs);
+    disposable = vscode.commands.registerCommand(
+        'tci.cmdCreateZip', cmdCreateZip);
     context.subscriptions.push(disposable);
 
-    disposable = vscode.commands.registerCommand('tci.cmdCreateDeploymentArtifacts', cmdCreateDeploymentArtifacts);
+    disposable = vscode.commands.registerCommand(
+        'tci.cmdCreateApp', cmdCreateApp);
     context.subscriptions.push(disposable);
 
-    disposable = vscode.commands.registerCommand('tci.cmdCreateNodejsApp', cmdCreateNodejsApp);
+    disposable = vscode.commands.registerCommand(
+        'tci.cmdPushApp', cmdPushApp);
     context.subscriptions.push(disposable);
 
-    disposable = vscode.commands.registerCommand('tci.cmdPushNodejsApp', cmdPushNodejsApp);
+    disposable = vscode.commands.registerCommand(
+        'tci.cmdRunApp', cmdRunApp);
     context.subscriptions.push(disposable);
 
-    disposable = vscode.commands.registerCommand('tci.cmdRunNodeApp', cmdRunNodeApp);
-    context.subscriptions.push(disposable);
+    disposable = vscode.commands.registerCommand(
+        'tci.cmdAddProperty', cmdAddProperty);
 
-    disposable = vscode.commands.registerCommand('tci.cmdAddPropertyToManifest', cmdAddPropertyToManifest);
     context.subscriptions.push(disposable);
 }
 
 /**
- * UI handler for cmdCheckInstallationStatus
+ * This method is called to check the existence of tibcli
  */
 function cmdCheckInstallationStatus() {
-    if (tools.checkTibcliExists(vscode.workspace.getConfiguration('tci').get('tibcli'))) {
+    if (tcitools.checkTibcli(vscode.workspace.getConfiguration('tci').get('tibcli'))) {
         vscode.window.showInformationMessage('tibcli was found on your system. You\'re ready to go!');
     } else {
-        let messageItems = ['The tibcli location is not set or tibcli doesn\'t exist, visit ' + tools.urls.toolsDocs + ' for instructions'];
-        messageItems.push('Open in browser');
-        vscode.window.showErrorMessage.apply(this, messageItems).then(function(value) {
-            if (value == 'Open in browser') {
-                tools.launchBrowserWithUrl(tools.urls.toolsDocs);
+        let messageItems = ['tibcli was not found, check the docs for instructions'];
+        messageItems.push('Open docs');
+        vscode.window.showErrorMessage.apply(this, messageItems).then(function(value) { // eslint-disable-line no-invalid-this
+            if (value == 'Open docs') {
+                tcitools.openBrowser('tooldocs');
             }
         });
     }
 }
 
 /**
- * UI handler for cmdCheckExtensionVersion
- */
-function cmdCheckExtensionVersion() {
-    vscode.window.showInformationMessage(`You\'re running version ${tools.extension.version} of ${tools.extension.publisher}.${tools.extension.name}`);
-}
-
-/**
- * UI handler for cmdLaunchAPIModeler
+ * This method is called to open API Modeler in a web browser
  */
 function cmdLaunchAPIModeler() {
-    tools.launchBrowserWithUrl(tools.urls.apiModeler);
+    let region = vscode.workspace.getConfiguration('tci').get('region');
+    tcitools.openBrowser('apimodeler', region);
 }
 
 /**
- * UI handler for cmdLaunchTIBCOCommunity
- */
+* This method is called to open TIBCO Community in a web browser
+*/
 function cmdLaunchTIBCOCommunity() {
-    tools.launchBrowserWithUrl(tools.urls.tciCommunity);
+    let region = vscode.workspace.getConfiguration('tci').get('region');
+    tcitools.openBrowser('community', region);
 }
 
 /**
- * UI handler for cmdLaunchTCIDocs
- */
+* This method is called to open the TCI docs in a web browser
+*/
 function cmdLaunchTCIDocs() {
-    tools.launchBrowserWithUrl(tools.urls.tciDocs);
+    let region = vscode.workspace.getConfiguration('tci').get('region');
+    tcitools.openBrowser('tcidocs', region);
 }
 
 /**
- * UI handler for cmdCreateDeploymentArtifacts
- */
-function cmdCreateDeploymentArtifacts() {
-    tools.createDeploymentArtifacts(vscode.workspace.rootPath);
-}
-
-/**
- * UI handler for cmdCreateNodejsApp
- */
-function cmdCreateNodejsApp() {
-    vscode.window.showInputBox({
-        prompt: 'Please enter the name and version of your new Node.js app.',
-        placeHolder: 'myApp 1.0.0',
-    }).then((appdetails) => {
-        if (appdetails.split(' ').length != 2) {
-            vscode.window.showErrorMessage(appdetails + ' is not a valid name and version.');
-            return;
-        } else {
-            let details = appdetails.split(' ');
-            tools.createNewNodejsApp(details[0], details[1], vscode.workspace.rootPath, function() {
-                vscode.workspace.openTextDocument(vscode.workspace.rootPath + '/' + details[0] + '/server.js').then((document) => {
-                    vscode.window.showTextDocument(document);
-                });
-            });
-        }
-    });
-}
-
-/**
- * UI handler for cmdPushNodejsApp
- */
-function cmdPushNodejsApp() {
-    if (tools.checkTibcliExists(vscode.workspace.getConfiguration('tci').get('tibcli'))) {
-        tools.pushNodejsApp(vscode.workspace.rootPath, vscode.workspace.getConfiguration('tci').get('tibcli'));
+* This method is called to create a zip file to push to TCI
+*/
+function cmdCreateZip() {
+    if (vscode.workspace.rootPath == undefined) {
+        vscode.window.showErrorMessage('To create zip files, you need to open a folder first');
     } else {
-        let messageItems = ['The tibcli location is not set or tibcli doesn\'t exist, visit ' + tools.urls.toolsDocs + ' for instructions'];
-        messageItems.push('Open in browser');
-        vscode.window.showErrorMessage.apply(this, messageItems).then(function(value) {
-            if (value == 'Open in browser') {
-                tools.launchBrowserWithUrl(tools.urls.toolsDocs);
+        tcitools.createZip(vscode.workspace.rootPath);
+    }
+}
+
+/**
+* This method is called to create a new app in VSCode
+*/
+function cmdCreateApp() {
+    if (vscode.workspace.rootPath == undefined) {
+        vscode.window.showErrorMessage('To create a new app, you need to open a folder first');
+    } else {
+        vscode.window.showInputBox({
+            prompt: 'Enter the name and version of your new Node.js app.',
+            placeHolder: 'myApp 1.0.0',
+        }).then((appdetails) => {
+            if (appdetails.split(' ').length < 2) {
+                vscode.window.showErrorMessage(`(${appdetails}) is not a valid name and version`);
+            } else {
+                let details = appdetails.split(' ');
+                tcitools.createNewApp(details[0], details[1], vscode.workspace.rootPath, function() {
+                    vscode.workspace.openTextDocument(path.join(vscode.workspace.rootPath, details[0], 'server.js')).then((document) => {
+                        vscode.window.showTextDocument(document);
+                    });
+                });
             }
         });
     }
 }
 
 /**
- * UI handler for cmdRunNodeApp
- */
-function cmdRunNodeApp() {
-    tools.runNodeApp(vscode.workspace.rootPath);
+* This method is called to push an app to TCI using tibcli
+*/
+function cmdPushApp() {
+    if (tcitools.checkTibcli(vscode.workspace.getConfiguration('tci').get('tibcli'))) {
+        tcitools.pushApp(vscode.workspace.rootPath, vscode.workspace.getConfiguration('tci').get('tibcli'));
+    } else {
+        let messageItems = ['tibcli was not found, check the docs for instructions'];
+        messageItems.push('Open docs');
+        vscode.window.showErrorMessage.apply(this, messageItems).then(function(value) { // eslint-disable-line no-invalid-this
+            if (value == 'Open docs') {
+                tcitools.openBrowser('tooldocs');
+            }
+        });
+    }
 }
 
 /**
- * UI handler for cmdAddPropertyToManifest
- */
-function cmdAddPropertyToManifest() {
+* This method is called to run an app locally
+*/
+function cmdRunApp() {
+    if (vscode.workspace.rootPath == undefined) {
+        vscode.window.showErrorMessage('To run an app, you need to open a folder first');
+    } else {
+        tcitools.runApp(vscode.workspace.rootPath);
+    }
+}
+
+/**
+* This method is called to add an environment variable to the manifest
+*/
+function cmdAddProperty() {
     vscode.window.showInputBox({
         prompt: 'Please enter the name, type and default value of your new Env var.',
-        placeHolder: 'DB_USER string',
+        placeHolder: 'DB_USER string admin',
     }).then((vardetails) => {
-        if (vardetails.split(' ').length != 3) {
-            vscode.window.showErrorMessage(vardetails + ' is not a valid name, type and default value.');
+        if (vardetails.split(' ').length < 3) {
+            vscode.window.showErrorMessage(`(${vardetails}) is not a valid name, type and default value.`);
             return;
         } else {
             let details = vardetails.split(' ');
-            tools.addPropertyToManifest(details[0], details[1], details[2], vscode.workspace.rootPath);
+            tcitools.updateManifestVariables(null, details[0], details[1], details[2], vscode.workspace.rootPath);
         }
     });
 }
@@ -169,9 +183,7 @@ function cmdAddPropertyToManifest() {
 /**
  * This method is called when the extension is deactivated
  */
-function deactivate() {
-
-}
+function deactivate() {}
 
 /**
  * Exports

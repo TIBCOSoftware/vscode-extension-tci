@@ -1,5 +1,3 @@
 node_modules
-*.vsix
-package-lock.json
-.vscode-test
-.DS_Store
+.vscode-test/
+.vsix

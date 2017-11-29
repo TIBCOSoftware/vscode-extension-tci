@@ -1,6 +1,10 @@
 # Release Notes
 
-## 0.4.1 [current]
+## 0.5.0 [current]
+* Removed dependency on the operating system to zip files (now done by a Node.js module)
+* Updated version to match the [cli version](https://github.com/TIBCOSoftware/tibcli-node) of this tool
+
+## 0.4.1
 * Updated version to match the [cli version](https://github.com/TIBCOSoftware/tibcli-node) of this tool
 * Added the ability to specify a default value for environment variables
 
