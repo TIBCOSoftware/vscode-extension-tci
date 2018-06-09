@@ -1,7 +1,7 @@
 # TCI Tools for Node.js
 
 ![](https://travis-ci.org/TIBCOSoftware/vscode-extension-tci.svg)
-![](https://img.shields.io/badge/release-v0.5.0-blue.svg)
+![](https://img.shields.io/badge/release-v0.5.1-blue.svg)
 ![](https://img.shields.io/badge/dependencies-up%20to%20date-green.svg)
 ![](https://img.shields.io/badge/license-BSD%20style-blue.svg)
 

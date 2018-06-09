@@ -2,10 +2,10 @@
     "name": "tcitools",
     "displayName": "TCI Tools for Node.js",
     "description": "TIBCO Cloud Integration Node.js Tools for VS Code",
-    "version": "0.5.0",
+    "version": "0.5.1",
     "publisher": "retgits",
     "engines": {
-        "vscode": "^1.18.0"
+        "vscode": "^1.23.0"
     },
     "categories": [
         "Other"
@@ -86,13 +86,13 @@
         "linter": "node_modules/.bin/eslint extension.js ./src"
     },
     "devDependencies": {
-        "@types/mocha": "^2.2.32",
-        "@types/node": "^6.0.40",
+        "@types/mocha": "^5.2.1",
+        "@types/node": "^10.3.2",
         "chai": "^4.1.1",
         "eslint": "^4.5.0",
         "eslint-config-google": "^0.9.1",
-        "mocha": "^2.5.3",
-        "rewire": "^2.5.2",
+        "mocha": "^5.2.0",
+        "rewire": "^4.0.1",
         "typescript": "^2.0.3",
         "vscode": "^1.1.5"
     },
@@ -106,8 +106,8 @@
     "homepage": "https://tibcosoftware.github.com/vscode-extension-tci",
     "dependencies": {
         "archiver": "^2.1.0",
-        "fs-extra": "^4.0.1",
-        "klaw-sync": "^3.0.2"
+        "fs-extra": "^6.0.1",
+        "klaw-sync": "^4.0.0"
     },
     "galleryBanner": {
         "color": "#f2f2f2",

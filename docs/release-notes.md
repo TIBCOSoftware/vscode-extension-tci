@@ -1,6 +1,9 @@
 # Release Notes
 
-## 0.5.0 [current]
+## 0.5.1 [current]
+* Updated dev dependencies
+
+## 0.5.0
 * Removed dependency on the operating system to zip files (now done by a Node.js module)
 * Updated version to match the [cli version](https://github.com/TIBCOSoftware/tibcli-node) of this tool
 
